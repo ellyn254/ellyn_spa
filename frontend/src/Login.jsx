@@ -28,21 +28,31 @@ const handleSubmit = (event) => {
     <div className='bg-white p-3 rounded w-25'>
         <h2>Sign In</h2>
         <form onSubmit={handleSubmit}>
-        <div className='mb-3'>
-                    <label><strong>Email:</strong>
-                    <input type='email' placeholder='Enter Email' autoComplete='off' required
-                    onChange={e => setValues({...values, email: e.target.value})}
-                    name='email' className='form-control rounded-0'/></label>
-                </div>
-                <div className='mb-3'>
-                    <label><strong>Password:</strong>
-                    <input type='password' placeholder='Enter Password' autoComplete='off' required 
-                    onChange={e => setValues({...values, password: e.target.value})}
-                    name='password' className='form-control rounded-0'/></label>
-                </div>
-                <button type='submit' className='btn btn-success w-100 rounded-0'>Login</button>
+        <div className="mb-3">
+          <label>Email:</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            name="email"
+           required
+           onChange={e => setValues({...values, email: e.target.value})} 
+          />
+        </div>
+        <div className="mb-3">
+          <label>Password:</label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            name="password"
+           required
+           onChange={e => setValues({...values, password: e.target.value})} 
+          />
+        </div>
+                <button type='submit' className='btn btn-primary w-100 rounded-0'>Login</button>
                 <p>Agree to terms and conditions</p>
-                <Link to={`/register`} className='btn btn-default border w-100 bg-light rounded-0 text-decoration-none'>Create Account</Link>
+                <Link to={`/register`} className='btn btn-default border w-100 bg-info rounded-0 text-decoration-none'>Create Account</Link>
         </form>
         </div>
     </div>
