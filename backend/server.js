@@ -1,15 +1,11 @@
 const express = require ('express')
 const mysql = require ('mysql')
 const cors = require ('cors')
-const jwt = require ('jsonwebtoken')
-const bcrypt = require ('bcrypt')
-const cookieParser = require ('cookie-parser')
-//const salt = 10;
+
 
 const app = express();
-app.use(express.json());
+app.use(express.json());//used to pass data to payload
 app.use(cors());
-app.use(cookieParser());
 
 //create a database connection
 const db = mysql.createConnection({
@@ -19,55 +15,96 @@ const db = mysql.createConnection({
     database: "spa"
 })
 
+//FETCH API
+app.get('/', (req, res) => {
+    const sql="SELECT * FROM users";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error")
+        return res.json(data)
+    })
+})
 
-//create a register API
+//REGISTER API
 app.post('/register', (req, res) => {
     //create sql statements
     const sql = "INSERT INTO users (`name`, `phone`, `email`, `password`) VALUES (?)";
-    //bcrypt.hash(req.body.password.toString(), salt, (err, hash) => {
-       // if(err) return res.json({Error: "Error in hashing password"});
+    //to get the values we write the below code
         const values = [
             req.body.name,
             req.body.phone,
             req.body.email,
             req.body.password
         ]
-        db.query(sql, [values], (err, _result) => {
+        db.query(sql, [values], (err, data) => {
             if(err) {
-                return res.json({Error: "Data insertion error"});
-             } else{
-                 res.send({Status: "Success"})}
+                return res.json("Error");
+             } 
+                return res.json(data);
         })
         
     })
-    
-//})
 
-app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM users WHERE email = ?";
-    db.query(sql, [req.body.email], (err, data) => {
-        if (err) return res.json({Error: "Login error"});
-        if (data.length >0) {
-            bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
-                if(err) return res.json({Error: "password comparison error"});
-                if(response) {
-                    return res.json({Status: "Success"})
-                } else {
-                    return res.json({Error: "password marching error"})
-                }
+    //UPDATE API
+    app.put('/update/:id', (req, res) => {
+        //create sql statements
+        const sql = "UPDATE users SET name=?, phone=?, email=?, password=? WHERE id=?";
+        //to get the values we write the below code
+            const values = [
+                req.body.name,
+                req.body.phone,
+                req.body.email,
+                req.body.password
+            ]
+
+            //to get the id we write the below code
+            const id = req.params.id;
+            db.query(sql, [...values, id], (err, data) => {
+                if(err) {
+                    return res.json("Error");
+                 } 
+                    return res.json(data);
             })
+            
+        })
 
-        }else {
-            return res.json({Error: "No Email record"})
+        //DELETE API
+    app.delete('/user/:id', (req, res) => {
+        //create sql statements
+        const sql = "DELETE FROM users WHERE id = ?";
+    
+            //to get the id we write the below code
+            const id = req.params.id;
+            db.query(sql, [id], (err, data) => {
+                if(err) {
+                    return res.json("Error");
+                 } 
+                    return res.json(data);
+            })
+            
+        })
+
+
+
+        //LOGIN API
+app.post('/login', (req, res) => {
+    const sql = "SELECT * FROM users WHERE `email` = ? AND `password`= ?";
+    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+        if (err) {
+            return res.json("Error");
         }
+        if (data.length >0) {
+            return res.json("Success")
+            // const id = data[0].id;
+            // const token = jwt.sign({id}, "jwtSecretKey", {expiresIn:300});
+            //         return res.json({Login: true, token, data});
+        } else {
+            return res.json("Failed")
+        }
+        })
     })
-})
-// *******************************************************************************************************************
-
-// *************************************************************************************************************
-
 
 //run the server
 app.listen(8081, () => {
     console.log("Listening ...");
 })
+

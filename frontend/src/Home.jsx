@@ -8,9 +8,9 @@ const Home = () => {
         <h2 >WELCOME TO ELLYN SPA</h2>
     </div>
      <img src={require('./images/house.jpg')} alt='' height={400} width={400} />
-     <img src={require('./images/ladies.jpg')} alt='' height={400} width={400} />
      <img src={require('./images/elegant.jpg')} alt='' height={400} width={400} />
      <img src={require('./images/magic.webp')} alt='' height={400} width={400} />
+     <img src={require('./images/NAIL.jpg')} alt='' height={400} width={400} />
      </div>
   )
 }

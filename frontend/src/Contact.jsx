@@ -1,58 +1,3 @@
-// import React, { useState } from 'react';
-// import './Contact.css'
-
-// const Contact = () => {
-//   const [values, setValues] = useState({
-//     email: '',
-//     message: ''
-//   });
-
-// //   const handleChange = (e) => {
-// //     setFormData({
-// //       ...formData,
-// //       [e.target.name]: e.target.value
-// //     });
-// //   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // You can perform further actions here, such as sending the form data to a server
-//     console.log(values);
-//     // Clear the form after submission
-//     setValues({
-//       email: '',
-//       message: ''
-//     });
-//   };
-
-//   return (
-//     <div className='d-flex justify-content-center text-black vh-100'>
-//         <div className='bg-white p-3 rounded w-25 '>
-// <h2>THIS IS A CONTACT PAGE</h2>
-//       <form onSubmit={handleSubmit}>
-//       <div className='mb-3'>
-//                     <label><strong>Email:</strong>
-//                     <input type='email' placeholder='Enter Email' name='email' autoComplete='off' required
-//                     onChange={e => setValues({...values, email: e.target.value})}
-//                     className='form-control rounded-0'/></label>
-//                 </div>
-//                 <div className='mb-3'>
-//                     <label><strong>Message:</strong>
-//                     <textarea type='message' placeholder='Enter message' name='message' autoComplete='off' required
-//                     onChange={e => setValues({...values, message: e.target.value})}
-//                     className='form-control rounded-0'/></label>
-//                 </div>
-//                 <button type='submit' className='btn btn-success w-100 rounded-0'>Send</button>
-        
-//               </form>
-//               </div>
-//               </div>
-    
-//   );
-// };
-
-// export default Contact;
-
 import React, { useState } from 'react';
 
 const BootstrapContactForm = () => {
@@ -78,12 +23,14 @@ const BootstrapContactForm = () => {
   };
 
   return (
-    <div className="container mt-5 p-3 rounded bg-white w-25 justify-content-center ">
-      <h2>This is a Contact Page</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="d-flex align-items-center justify-content-center vh-100">
       
+      <div className='bg-info p-3 rounded w-25'>
+      
+      <form onSubmit={handleSubmit}>
+      <h2>Contact Page</h2>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email:</label>
+          <label><strong>Email:</strong></label>
           <input
             type="email"
             className="form-control"
@@ -92,11 +39,12 @@ const BootstrapContactForm = () => {
             value={values.email}
             onChange={handleChange}
             required
+            autoComplete='off'
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="message" className="form-label">Message:</label>
+          <label><strong>Message:</strong></label>
           <textarea
             className="form-control"
             id="message"
@@ -104,10 +52,12 @@ const BootstrapContactForm = () => {
             value={values.message}
             onChange={handleChange}
             required
+            autoComplete='off'
           />
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary w-100">Submit</button>
       </form>
+    </div>
     </div>
   );
 };

@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate, useParams} from 'react-router-dom'
 import axios from 'axios'
 
 
-const Register = () => {
+const Update = () => {
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    //to pass the id we use the useSearchParams hook as below
+    const {id} = useParams();
     const navigate = useNavigate();
 
      function handleSubmit(event){
       event.preventDefault();
       //here we use axios library to pass data
-      axios.post('http://localhost:8081/register', {name,phone,email,password})
+      axios.put('http://localhost:8081/update/'+id, {name,phone,email,password})
       //after which we print the result
       .then(res => {
         console.log(res)
-        navigate('/login')
+        navigate('/')
         //else if an error occurs
       }).catch(err => console.log(err))
      }
@@ -26,7 +28,7 @@ const Register = () => {
   return (
     <div className='d-flex justify-content-center align-items-center vh-100'>
     <div className='bg-info p-3 rounded w-25'>
-            <h2>Sign Up</h2>
+            <h2>Update</h2>
             <form onSubmit={handleSubmit}>
             <div className="mb-3">
           <label htmlFor='name'><strong>Name:</strong></label>
@@ -76,7 +78,7 @@ const Register = () => {
            onChange={e => setPassword(e.target.value)}/>
         </div>
         
-                <button type='submit' className='btn btn-primary w-100 rounded-0'>Register</button>
+                <button type='submit' className='btn btn-primary w-100 rounded-0'>Update</button>
                 Agree to terms and conditions
                 <Link to={`/login`} className='btn btn-default border w-100 bg-info rounded-0 text-decoration-none'>Login</Link>
             </form>
@@ -85,4 +87,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Update

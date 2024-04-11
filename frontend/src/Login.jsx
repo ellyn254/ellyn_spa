@@ -5,57 +5,56 @@ import axios from 'axios'
 
 const Login = () => {
 
-  const [values, setValues] = useState({
-    email: '',
-    password: ''
-})
-const navigate = useNavigate()
-const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.post('http://localhost:8081/login', values)
-    .then(res => {
-       if(res.data.Status === "Success") {
-        navigate('/')
-       } else {
-        alert(res.data.Error);
-       }
-    })
-    .then(err => console.log(err));
-}
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
+  const navigate = useNavigate();
+
+   function handleSubmit(event){
+    event.preventDefault();
+    //here we use axios library to pass data
+    axios.post('http://localhost:8081/login', {email,password})
+    //after which we print the result
+    .then(res => {
+      console.log(res)
+      navigate('/home')
+      //else if an error occurs
+    }).catch(err => console.log(err))
+   }
   return (
+    
     <div className='d-flex justify-content-center align-items-center vh-100'>
-    <div className='bg-white p-3 rounded w-25'>
+      <div className='bg-info p-3 rounded w-25'>
         <h2>Sign In</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
         <div className="mb-3">
-          <label>Email:</label>
+          <label htmlFor='email'><strong>Email:</strong></label>
           <input
             type="email"
             className="form-control"
             id="email"
             name="email"
-           required
-           onChange={e => setValues({...values, email: e.target.value})} 
-          />
+           autoComplete='off'
+           onChange={e => setEmail(e.target.value)}/>
         </div>
+
         <div className="mb-3">
-          <label>Password:</label>
+          <label htmlFor='password'><strong>Password:</strong></label>
           <input
             type="password"
             className="form-control"
             id="password"
             name="password"
-           required
-           onChange={e => setValues({...values, password: e.target.value})} 
-          />
+           autoComplete='off'
+           onChange={e => setPassword(e.target.value)}/>
         </div>
                 <button type='submit' className='btn btn-primary w-100 rounded-0'>Login</button>
                 <p>Agree to terms and conditions</p>
                 <Link to={`/register`} className='btn btn-default border w-100 bg-info rounded-0 text-decoration-none'>Create Account</Link>
         </form>
         </div>
-    </div>
+        </div>
+        
   )
 }
 
