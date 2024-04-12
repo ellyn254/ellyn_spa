@@ -12,6 +12,8 @@ const Home = () => {
      <img src={require('./images/magic.webp')} alt='' height={400} width={400} />
      <img src={require('./images/NAIL.jpg')} alt='' height={400} width={400} />
      </div>
+     
+     
   )
 }
 

@@ -35,6 +35,7 @@ const Login = () => {
             id="email"
             name="email"
            autoComplete='off'
+           required
            onChange={e => setEmail(e.target.value)}/>
         </div>
 
@@ -46,6 +47,7 @@ const Login = () => {
             id="password"
             name="password"
            autoComplete='off'
+           required
            onChange={e => setPassword(e.target.value)}/>
         </div>
                 <button type='submit' className='btn btn-primary w-100 rounded-0'>Login</button>
