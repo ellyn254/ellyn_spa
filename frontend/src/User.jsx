@@ -25,7 +25,7 @@ useEffect(() => {
 
   return (
     <div className='d-flex vh-100 justify-content-center align-items-center'>
-        <div className='p-3 w-50 rounded bg-info'>
+        <div className='p-3 w-50 rounded bg-white'>
             <h2>REACT CRUD APP</h2>
             <Link to={`/register`} className='btn btn-success'>ADD +</Link>
             <table className='table table-danger table-striped'>

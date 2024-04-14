@@ -20,13 +20,12 @@ function App() {
   };
   return (
     
-    <BrowserRouter>,
-     
+    <BrowserRouter>
       <header>
         <img src={Image} alt="images" width={80} height={70} />
         <nav ref={navRef}>
-          <a href="/home">Home</a>
-          <a href="/">About</a>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
           <a href="/contact">Contact</a>
           <a href="/register">Profile</a>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>

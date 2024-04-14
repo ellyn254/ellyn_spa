@@ -25,7 +25,7 @@ const Register = () => {
 
   return (
     <div className='d-flex justify-content-center align-items-center vh-100'>
-    <div className='bg-info p-3 rounded w-25'>
+    <div className='bg-white p-3 rounded w-25'>
             <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -76,7 +76,7 @@ const Register = () => {
            onChange={e => setPassword(e.target.value)}/>
         </div>
         
-                <button type='submit' className='btn btn-primary w-100 rounded-0'>Register</button>
+                <button type='submit' className='btn btn-secondary w-100 rounded-0'>Register</button>
                 Agree to terms and conditions
                 <Link to={`/login`} className='btn btn-default border w-100 bg-info rounded-0 text-decoration-none'>Login</Link>
             </form>

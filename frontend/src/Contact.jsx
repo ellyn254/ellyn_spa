@@ -25,7 +25,7 @@ const BootstrapContactForm = () => {
   return (
     <div className="d-flex align-items-center justify-content-center vh-100">
       
-      <div className='bg-info p-3 rounded w-50'>
+      <div className='bg-white p-3 rounded w-50'>
       
       <form onSubmit={handleSubmit}>
       <h2>Contact Page</h2>
@@ -55,7 +55,7 @@ const BootstrapContactForm = () => {
             autoComplete='off'
           />
         </div>
-        <button type="submit" className="btn btn-primary w-100">Submit</button>
+        <button type="submit" className="btn btn-secondary w-100">Submit</button>
       </form>
     </div>
     </div>

@@ -27,7 +27,7 @@ const Update = () => {
 
   return (
     <div className='d-flex justify-content-center align-items-center vh-100'>
-    <div className='bg-info p-3 rounded w-25'>
+    <div className='bg-white p-3 rounded w-25'>
             <h2>Update</h2>
             <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -78,7 +78,7 @@ const Update = () => {
            onChange={e => setPassword(e.target.value)}/>
         </div>
         
-                <button type='submit' className='btn btn-primary w-100 rounded-0'>Update</button>
+                <button type='submit' className='btn btn-secondary w-100 rounded-0'>Update</button>
                 Agree to terms and conditions
                 <Link to={`/login`} className='btn btn-default border w-100 bg-info rounded-0 text-decoration-none'>Login</Link>
             </form>

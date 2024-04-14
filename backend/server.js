@@ -1,11 +1,14 @@
 const express = require ('express')
 const mysql = require ('mysql')
-const cors = require ('cors')
+const jwt = require('jsonwebtoken')
+const cors = require ('cors') //enables us access our backend APIs from frontend
 
 
 const app = express();
 app.use(express.json());//used to pass data to payload
 app.use(cors());
+
+const secretKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJqb2huZG9lIiwiaWF0IjoxNjg0NDg4NjYzfQ.v2MNdqsxtYjwHnrcwno3tTc-g64u1piVdEpCsRNNz4w';
 
 //create a database connection
 const db = mysql.createConnection({
@@ -43,6 +46,21 @@ app.post('/register', (req, res) => {
         })
         
     })
+
+      //LOGIN API
+app.post('/login', (req, res) => {
+    const sql = "SELECT * FROM users WHERE `email` = ? AND `password`= ?";
+    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+            if (err) {
+                return res.json({Error:"Error"});
+            }
+            if (data.length >0) {
+                return res.json({Status:'Login successful'})
+            }else {
+                return res.json({Message:'No record'});
+            }
+    })
+})
 
     //UPDATE API
     app.put('/update/:id', (req, res) => {
@@ -83,26 +101,7 @@ app.post('/register', (req, res) => {
             
         })
 
-
-
-        //LOGIN API
-app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM users WHERE `email` = ? AND `password`= ?";
-    db.query(sql, [req.body.email, req.body.password], (err, data) => {
-        if (err) {
-            return res.json("Error");
-        }
-        if (data.length >0) {
-            return res.json("Success")
-            // const id = data[0].id;
-            // const token = jwt.sign({id}, "jwtSecretKey", {expiresIn:300});
-            //         return res.json({Login: true, token, data});
-        } else {
-            return res.json("Failed")
-        }
-        })
-    })
-
+  
 //run the server
 app.listen(8081, () => {
     console.log("Listening ...");
